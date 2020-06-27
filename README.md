@@ -1,6 +1,6 @@
 # detailapp
 
-first demo flutter app
+This app can add and show details of you and your friends.
 
 ## Getting Started
 
