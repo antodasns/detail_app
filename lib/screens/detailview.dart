@@ -33,7 +33,7 @@ class DetailView extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              'Chun-Li',
+              'Anto',
               style: TextStyle(
                 color: Colors.brown,
                 fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class DetailView extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              'Beijing, China',
+              'TVM',
               style: TextStyle(
                 color: Colors.brown,
                 fontWeight: FontWeight.bold,

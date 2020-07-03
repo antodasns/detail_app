@@ -3,8 +3,16 @@ import 'package:detailapp/screens/addingform.dart';
 import 'package:detailapp/screens/editingform.dart';
 import 'package:detailapp/screens/detailview.dart';
 import 'package:detailapp/screens/home_list.dart';
+import 'package:provider/provider.dart';
+import 'package:detailapp/notifier/detail_notifier.dart';
 
-void main() => runApp(DetailApp());
+void main() => runApp(MultiProvider(
+    providers:[
+      ChangeNotifierProvider(
+        create: (context) => DetailNotifier(),
+      ),
+    ],
+    child: DetailApp()));
 
 class DetailApp extends StatelessWidget {
 
