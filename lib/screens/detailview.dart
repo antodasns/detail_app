@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:detailapp/notifier/detail_notifier.dart';
+import 'package:detailapp/model/details.dart';
+import 'package:detailapp/api/detail_api.dart';
 
 class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    DetailNotifier detailNotifier = Provider.of<DetailNotifier>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
@@ -33,7 +38,7 @@ class DetailView extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              'Anto',
+              detailNotifier.currentUser.name,
               style: TextStyle(
                 color: Colors.brown,
                 fontWeight: FontWeight.bold,
@@ -51,7 +56,7 @@ class DetailView extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              'TVM',
+              detailNotifier.currentUser.place,
               style: TextStyle(
                 color: Colors.brown,
                 fontWeight: FontWeight.bold,
@@ -69,7 +74,7 @@ class DetailView extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              '15-08-2012',
+              detailNotifier.currentUser.dob,
               style: TextStyle(
                 color: Colors.brown,
                 fontWeight: FontWeight.bold,

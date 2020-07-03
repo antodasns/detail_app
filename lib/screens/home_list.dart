@@ -11,9 +11,9 @@ class HomeList extends StatefulWidget {
 class _HomeListState extends State<HomeList> {
   Widget userListing(){
     return Consumer<DetailNotifier>(
-        builder:(context,details,child){
+        builder:(context,x,child){
           return Column(
-            children: <Widget>[for(Detail detail in details.detailList)
+            children: <Widget>[for(Detail y in x.detailList)
               Card(
                 margin: EdgeInsets.all(10),
                 color:Colors.blueGrey[100],
@@ -27,7 +27,7 @@ class _HomeListState extends State<HomeList> {
                           children: <Widget>[
                             ListTile(
                               title: Container(
-                                child: Text(detail.name,
+                                child: Text(y.name,
                                   style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold,
@@ -37,6 +37,7 @@ class _HomeListState extends State<HomeList> {
                                 ),
                               ),
                               onTap: (){
+                                x.currentUser = y;
                                 Navigator.pushReplacementNamed(context, '/details');
                               },
                             ),
@@ -71,6 +72,7 @@ class _HomeListState extends State<HomeList> {
   void initState() {
     DetailNotifier detailNotifier = Provider.of<DetailNotifier>(context, listen: false);
     getDetails(detailNotifier);
+
     super.initState();
   }
   @override

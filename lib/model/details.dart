@@ -4,7 +4,7 @@ class Detail {
   String name;
   String place;
   String imageurl;
-  Timestamp dob;
+  String dob;
 
   Detail.fromMap(Map<String,dynamic>data){
     name=data['name'];
