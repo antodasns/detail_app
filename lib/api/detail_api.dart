@@ -33,9 +33,13 @@ uploadDetailAndImage(Detail detail, File localFile,DateTime selectedDate) async{
   String url = await firebaseStorageRef.getDownloadURL();
   _uploadDetail(detail,selectedDate, imageUrl: url);
   }
+  else{
+    _uploadDetail(detail,selectedDate);
+  }
 }
 
 _uploadDetail(Detail detail,selectedDate, {String imageUrl}) async {
+  if(imageUrl !=null) {
   CollectionReference detailRef = Firestore.instance.collection('details');
   DocumentReference documentRef = await detailRef.add(detail.toMap());
   Timestamp myTimeStamp = Timestamp.fromDate(selectedDate);
@@ -43,6 +47,16 @@ _uploadDetail(Detail detail,selectedDate, {String imageUrl}) async {
   detail.dob= myTimeStamp;
   detail.imageurl = imageUrl;
   await documentRef.setData(detail.toMap(), merge: true);
+}
+  else{
+    CollectionReference detailRef = Firestore.instance.collection('details');
+    DocumentReference documentRef = await detailRef.add(detail.toMap());
+    Timestamp myTimeStamp = Timestamp.fromDate(selectedDate);
+    detail.id = documentRef.documentID;
+    detail.dob= myTimeStamp;
+    detail.imageurl = "https://firebasestorage.googleapis.com/v0/b/detailapp-6bb92.appspot.com/o/hd_dp.jpg?alt=media&token=3517307e-3540-4e27-af3a-18b7c393e05f";
+    await documentRef.setData(detail.toMap(), merge: true);
+  }
 }
 
 editDetailAndImage(Detail detail, File localFile,DateTime selectedDate) async{
@@ -58,14 +72,25 @@ editDetailAndImage(Detail detail, File localFile,DateTime selectedDate) async{
     String url = await firebaseStorageRef.getDownloadURL();
     _editDetail(detail,selectedDate, imageUrl: url);
   }
+  else{
+    _editDetail(detail,selectedDate);
+  }
 }
 
 _editDetail(Detail detail,selectedDate, {String imageUrl}) async {
-  CollectionReference detailRef = Firestore.instance.collection('details');
-  Timestamp myTimeStamp = Timestamp.fromDate(selectedDate);
-  detail.dob= myTimeStamp;
-  detail.imageurl = imageUrl;
-  await detailRef.document(detail.id).updateData(detail.toMap());
+  if(imageUrl !=null) {
+    CollectionReference detailRef = Firestore.instance.collection('details');
+    Timestamp myTimeStamp = Timestamp.fromDate(selectedDate);
+    detail.dob = myTimeStamp;
+    detail.imageurl = imageUrl;
+    await detailRef.document(detail.id).updateData(detail.toMap());
+  }
+  else{
+    CollectionReference detailRef = Firestore.instance.collection('details');
+    Timestamp myTimeStamp = Timestamp.fromDate(selectedDate);
+    detail.dob = myTimeStamp;
+    await detailRef.document(detail.id).updateData(detail.toMap());
+  }
 }
 
 

@@ -59,13 +59,7 @@ class _AddingFormState extends State<EditingForm> {
         title: Text("Add"),
         centerTitle: true,
         backgroundColor: Colors.green,
-        leading: IconButton(
-          icon: Icon(Icons.home),
-          color: Colors.white,
-          onPressed: (){
-            Navigator.pushReplacementNamed(context, '/homelist');
-          },
-        ),),
+        ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -111,6 +105,7 @@ class _AddingFormState extends State<EditingForm> {
                 editDetailAndImage(_currentUser,_imageFile,selectedDate);
                 Navigator.pushReplacementNamed(context, '/homelist');
                 editedContent(context);
+
               },
                 child: Text('Save'),
                 color: Colors.blue,

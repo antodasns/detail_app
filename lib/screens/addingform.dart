@@ -60,13 +60,7 @@ class _AddingFormState extends State<AddingForm> {
         title: Text("Add"),
         centerTitle: true,
         backgroundColor: Colors.green,
-        leading: IconButton(
-          icon: Icon(Icons.home),
-          color: Colors.white,
-          onPressed: (){
-            Navigator.pushReplacementNamed(context, '/homelist');
-          },
-        ),),
+        ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

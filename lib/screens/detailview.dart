@@ -25,13 +25,7 @@ class _DetailViewState extends State<DetailView> {
         title: Text('Details'),
         centerTitle: true,
         backgroundColor: Colors.green,
-        leading: IconButton(
-          icon: Icon(Icons.home),
-          color: Colors.white,
-          onPressed: (){
-            Navigator.pushReplacementNamed(context, '/homelist');
-          },
-        ),
+
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
