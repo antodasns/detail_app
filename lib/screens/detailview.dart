@@ -3,16 +3,35 @@ import 'package:provider/provider.dart';
 import 'package:detailapp/notifier/detail_notifier.dart';
 import 'package:detailapp/model/details.dart';
 import 'package:detailapp/api/detail_api.dart';
+import 'package:intl/intl.dart';
 
-class DetailView extends StatelessWidget {
+class DetailView extends StatefulWidget {
+  @override
+  _DetailViewState createState() => _DetailViewState();
+}
+
+class _DetailViewState extends State<DetailView> {
+
+
   @override
   Widget build(BuildContext context) {
     DetailNotifier detailNotifier = Provider.of<DetailNotifier>(context);
+
+    DateTime myDateTime = DateTime.parse(detailNotifier.currentUser.dob.toDate().toString());
+    String formattedDateTime = DateFormat('dd-MM-yyyy').format(myDateTime);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
         centerTitle: true,
         backgroundColor: Colors.green,
+        leading: IconButton(
+          icon: Icon(Icons.home),
+          color: Colors.white,
+          onPressed: (){
+            Navigator.pushReplacementNamed(context, '/homelist');
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
@@ -22,7 +41,7 @@ class DetailView extends StatelessWidget {
             Center(
               child: CircleAvatar(
                 radius: 40.0,
-                backgroundImage: AssetImage('assets/thumb.jpg'),
+                backgroundImage: NetworkImage(detailNotifier.currentUser.imageurl),
               ),
             ),
             Divider(
@@ -74,7 +93,7 @@ class DetailView extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              detailNotifier.currentUser.dob,
+              formattedDateTime,
               style: TextStyle(
                 color: Colors.brown,
                 fontWeight: FontWeight.bold,

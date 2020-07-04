@@ -5,9 +5,23 @@ import 'package:detailapp/model/details.dart';
 import 'package:detailapp/api/detail_api.dart';
 class HomeList extends StatefulWidget {
   @override
+
   _HomeListState createState() => _HomeListState();
 }
-
+void deleteContent(BuildContext context)//popup box
+{
+  var alertDialog = AlertDialog(
+    backgroundColor:Colors.grey,
+    title:Text("Deleted",
+    ),
+    content:Text("Your Details has been Deleted",
+    ),
+  );
+  showDialog(
+      context:context,
+      builder:(BuildContext context)=>alertDialog
+  );
+}
 class _HomeListState extends State<HomeList> {
   Widget userListing(){
     return Consumer<DetailNotifier>(
@@ -46,6 +60,7 @@ class _HomeListState extends State<HomeList> {
                       ),
                       SizedBox(width: 10.0),
                       RaisedButton.icon(onPressed: () {
+                        x.currentUser = y;
                         Navigator.pushReplacementNamed(context, '/editform');
                       },
                         icon: Icon(Icons.edit),
@@ -54,7 +69,10 @@ class _HomeListState extends State<HomeList> {
                       ),
                       SizedBox(width: 6.0),
                       RaisedButton.icon(onPressed: () {
+                        deleteDetail(y);
 
+                        Navigator.pushReplacementNamed(context, '/homelist');
+                        deleteContent(context);
                       },
                         icon: Icon(Icons.delete),
                         label: Text('Delete'),
@@ -69,10 +87,10 @@ class _HomeListState extends State<HomeList> {
         },
     );
   }
+
   void initState() {
     DetailNotifier detailNotifier = Provider.of<DetailNotifier>(context, listen: false);
     getDetails(detailNotifier);
-
     super.initState();
   }
   @override
@@ -91,6 +109,7 @@ class _HomeListState extends State<HomeList> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: (){
+
           Navigator.pushReplacementNamed(context, '/addform');
         },
         child: Icon(Icons.add),
